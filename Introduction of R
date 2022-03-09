@@ -1,0 +1,166 @@
+Introduction of R
+1. Arithmetic operators: 
+  * Addition: +
+  * Subtraction: -
+  * Multiplication: *
+  * Division: /
+  * Exponentiation: ^
+  * Modulo: %%
+
+2. Variable assignment: <-
+ # assign a value 4 to a variable xx
+  * xx <- 4
+
+3. Basic data types in R
+  * Decimal values like 4.5 are called numerics.
+  * Whole numbers like 4 are called integers. Integers are also numerics.
+  * Boolean values (TRUE or FALSE) are called logical.
+  * Text (or string) values are called characters.
+    # Note how the quotation marks in the editor indicate that "some text" is a string.
+
+4. What's that data type? class()
+  * class(my_numeric)
+  * class(my_character)
+  * class(my_logical)
+
+5. Creat a vector : c()
+  * numeric_vector <- c(1, 2, 3)
+  * character_vector <- c("a", "b", "c")
+
+6. Naming a vector: names()
+  * some_vector <- c("John Doe", "poker player")
+  * names(some_vector) <- c("Name", "Profession")
+  *           Name     Profession 
+       "John Doe" "poker player" 
+
+7. Calculate: sum()
+  * poker_vector <- c(140, -50, 20, -120, 240)
+  * total_poker <- sum(poker_vector)
+
+8. Comparing: >,  <
+  * total_poker > total_roulette
+
+9. Vector selection: []
+  #  Notice that the first element in a vector has index 1, not 0 as in many other programming languages.
+  * poker_vector[1] 
+  * poker_vector[c(1, 5)]
+  * poker_vector[2:4]
+  # using the names of the vector elements (Monday, Tuesday, …) instead of their numeric positions. 
+  * poker_vector["Monday"]
+  * poker_vector[c("Monday","Tuesday")]
+  * mean(poker_start)
+
+10. The (logical) comparison operators known to R are:
+  * < for less than
+  * > for greater than
+  * <= for less than or equal to
+  * >= for greater than or equal to
+  * == for equal to each other
+  * != not equal to each other
+  * c(4, 5, 6) > 5
+    FALSE FALSE TRUE
+
+11. What is a matrix()? : In R, a matrix is a collection of elements of the same data type (numeric, character, or logical) arranged into a fixed number of rows and columns. Since you are only working with rows and columns, a matrix is called two-dimensional.
+  * matrix(1:9, byrow = TRUE, nrow = 3)
+  * The first argument is the collection of elements that R will arrange into the rows and columns of the matrix. Here, we use 1:9 which is a shortcut for c(1, 2, 3, 4, 5, 6, 7, 8, 9).
+  * The argument byrow indicates that the matrix is filled by the rows. If we want the matrix to be filled by the columns, we just place byrow = FALSE.
+  * The third argument nrow indicates that the matrix should have three rows.
+
+12. Naming a matrix: 
+  * rownames(my_matrix) <- row_names_vector
+  * colnames(my_matrix) <- col_names_vector
+
+13. Calculating the sum of rows and columns:  rowSums(), colSums()
+  * rowSums(my_matrix)
+  * colSums(my_matrix)
+
+14. Add a column to a matrix: You can add a column or multiple columns to a matrix with the cbind() function
+  * big_matrix <- cbind(matrix1, matrix2, vector1 ...)
+
+15. Adding a row: rbind()
+
+16. Selection of matrix element
+  * my_matrix[1,2] selects the element at the first row and second column.
+  * my_matrix[1:3,2:4] results in a matrix with the data on the rows 1, 2, 3 and columns 2, 3, 4.
+  * my_matrix[,1] selects all elements of the first column.
+  * my_matrix[1,] selects all elements of the first row.
+
+17. A little arithmetic with matrices: +, -, /, *
+  * 2 * my_matrix multiplies each element of my_matrix by two.
+
+18. Factor: factor() tells you how many variables in the list; # comparison is meatless for unordered (or nominal) factors
+  * sex_vector <- c("Male","Female","Female","Male","Male")
+  * factor_sex_vector <- factor(sex_vector)
+  * Female, Male
+
+19. Factor levels: levels() can change the names of these levels for clarity or other reasons.
+  * survey_vector <- c("M", "F", "F", "M", "M")
+  * factor_survey_vector <- factor(survey_vector)
+  * levels(factor_sex_vector) <- (“Female”, “Male”). # you should specify the order you assign the levels according to the output of factors, or R will automatically assign them alphabetically.
+  * Level: Female, Male
+
+The difference between a categorical variable and a continuous variable is that a categorical variable can belong to a limited number of categories. A continuous variable, on the other hand, can correspond to an infinite number of values.
+
+There are two types of categorical variables: a nominal categorical variable and an ordinal categorical variable.
+A nominal variable is a categorical variable without an implied order. This means that it is impossible to say that 'one is worth more than the other'. In contrast, ordinal variables do have a natural ordering.
+
+20. Summary a factor: summary() will give you a quick overview of the contents of a variable:
+  * summary(my_var)
+
+21. Create ordered factors: To create an ordered factor, you have to add two additional arguments: ordered and levels.
+
+22. Comparing ordered factors:
+
+22. Have a quick look at your dataset:  head() enables you to show the first observations of a data frame. Similarly, the function tail() prints out the last observations in your dataset. The function str() shows you the structure of your dataset
+  * head(xxx)
+  * tail(xxx)
+
+23. Creating a data frame: data.frame()
+
+24. Selection of data frame elements & subset(): 
+  * my_df[1,2] selects the value at the first row and second column in my_df.
+  * my_df[1:3,2:4] selects rows 1, 2, 3 and columns 2, 3, 4 in my_df.
+  # Suppose you want to select the first three elements of the type column. 
+  * planets_df[1:3,"type"]
+  #  If you want to select all elements of the variable diameter, for example, both of these will do the trick:
+  * planets_df[,3]
+  * planets_df[,"diameter"]
+  # However, there is a short-cut. If your columns have names, you can use the $ sign:
+  * planets_df$diameter
+  # If  you want to get a nice overview of the names of planets who is rings(rings=TRUE),  selects the name column of all planets that have ring
+  * planets_df[rings_vector, "name"]
+  # If you want instead of only the name column, all columns for planets that have rings are selected.
+  * planets_df[rings_vector, ]
+  # a short-cut to do exactly the same as what you did in the previous exercises is by calling subset()
+  * subset(planets_df, subset = rings)
+
+Sorting : order() is a function that gives you the ranked position of each element when it is applied on a variable.
+
+
+24. Create a list: list() The arguments to the list function are the list components. Remember, these components can be matrices, vectors, other lists, …
+  * my_list <- list(comp1, comp2 ...)
+
+25. Creating a named list: names()
+  * my_list <- list(your_comp1, your_comp2)
+  * names(my_list) <- c("name1", "name2")
+
+26. Select elements form a list: [[]], $
+  * shining_list[["reviews"]]
+  * shining_list$reviews
+  * shining_list[[2]][1]  # you select from the second component, actors (shining_list[[2]]), the first element ([1]).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
